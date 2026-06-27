@@ -1,0 +1,10 @@
+{
+  "name": "CivicPilot",
+  "description": "AI-powered civic intelligence that doesn\u0027t just report problems—it helps solve them.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
