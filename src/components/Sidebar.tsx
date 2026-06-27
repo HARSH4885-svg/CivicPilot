@@ -10,7 +10,8 @@ import {
   BarChart3,
   User,
   Building2,
-  Sliders
+  Sliders,
+  LogOut
 } from 'lucide-react';
 import { View } from '../types';
 
@@ -18,9 +19,10 @@ interface SidebarProps {
   currentView: View;
   onViewChange: (view: View) => void;
   hasUnfinishedMission: boolean;
+  onLogout: () => void;
 }
 
-export default function Sidebar({ currentView, onViewChange, hasUnfinishedMission }: SidebarProps) {
+export default function Sidebar({ currentView, onViewChange, hasUnfinishedMission, onLogout }: SidebarProps) {
   const menuItems = [
     { id: 'dashboard' as View, name: 'Dashboard', icon: LayoutDashboard },
     { id: 'impact-dashboard' as View, name: 'Impact Dashboard', icon: BarChart3 },
@@ -109,6 +111,18 @@ export default function Sidebar({ currentView, onViewChange, hasUnfinishedMissio
         })}
       </nav>
 
+      {/* Logout Action Button */}
+      <div className="px-4 pb-2">
+        <button
+          id="btn-sidebar-logout"
+          onClick={onLogout}
+          className="flex items-center gap-3 w-full px-4 py-3 text-sm text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 dark:hover:bg-rose-500/15 border border-transparent hover:border-rose-500/20 rounded-xl transition-all duration-300 cursor-pointer font-medium"
+        >
+          <LogOut className="w-5 h-5" />
+          <span>Sign Out / Lock Node</span>
+        </button>
+      </div>
+
       {/* Footer System Node Info */}
       <div className="p-4 border-t border-slate-200 dark:border-slate-800/60 m-4 bg-slate-100/50 dark:bg-slate-950/40 rounded-xl border border-slate-200 dark:border-slate-850 transition-colors duration-300">
         <div className="flex items-start gap-3">
@@ -116,9 +130,9 @@ export default function Sidebar({ currentView, onViewChange, hasUnfinishedMissio
             <Cpu className="w-3.5 h-3.5" />
           </div>
           <div>
-            <p className="text-xs text-slate-800 dark:text-slate-300 font-bold">CivicPilot Core Node</p>
+            <p className="text-xs text-slate-800 dark:text-slate-300 font-bold">🧠 Mission Control</p>
             <p className="text-[10px] text-slate-500 dark:text-slate-500 mt-1 leading-relaxed">
-              Orchestrated on Cloud Run via server-side Google Gemini. Secure Open311 & Cityworks API channels verified.
+              Six specialized AI agents collaborate to analyze, verify and prioritize every civic issue with transparent reasoning.
             </p>
           </div>
         </div>

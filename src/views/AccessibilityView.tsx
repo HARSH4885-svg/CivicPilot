@@ -25,6 +25,7 @@ interface AccessibilityViewProps {
   onReducedMotionChange: (val: boolean) => void;
   colorBlindMode: 'none' | 'grayscale' | 'protanopia' | 'deuteranopia' | 'tritanopia';
   onColorBlindModeChange: (mode: 'none' | 'grayscale' | 'protanopia' | 'deuteranopia' | 'tritanopia') => void;
+  onReplayTour: () => void;
 }
 
 export default function AccessibilityView({
@@ -37,7 +38,8 @@ export default function AccessibilityView({
   reducedMotion,
   onReducedMotionChange,
   colorBlindMode,
-  onColorBlindModeChange
+  onColorBlindModeChange,
+  onReplayTour
 }: AccessibilityViewProps) {
   const [showToast, setShowToast] = useState(false);
   const [toastMsg, setToastMsg] = useState('');
@@ -286,6 +288,32 @@ export default function AccessibilityView({
                 </button>
               </div>
 
+            </div>
+
+            {/* Product Tour Section */}
+            <div className="p-5 rounded-2xl border border-slate-150 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/10 hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-indigo-500 animate-pulse" />
+                  {language === 'hi' ? 'उत्पाद यात्रा / ऑनबोर्डिंग' : 'Product Tour & Onboarding'}
+                </h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {language === 'hi' 
+                    ? 'सिविकपायलट के मुख्य एआई एजेंटों, डेटा विज़ुअलाइज़ेशन और नागरिक उपकरणों को समझने के लिए ऑनबोर्डिंग उत्पाद यात्रा को फिर से शुरू करें।' 
+                    : "Restart the guided walkthrough to explore CivicPilot's major AI agents, dashboards, and community tools."
+                  }
+                </p>
+              </div>
+
+              <button
+                type="button"
+                id="btn-replay-product-tour"
+                onClick={onReplayTour}
+                className="w-full mt-4 flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold rounded-xl text-white bg-indigo-600 hover:bg-indigo-500 shadow-md shadow-indigo-600/15 cursor-pointer transition-all"
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span>{language === 'hi' ? 'उत्पाद यात्रा शुरू करें' : 'Replay Product Tour'}</span>
+              </button>
             </div>
 
             {/* Keyboard Guide Section */}

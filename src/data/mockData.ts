@@ -1,4 +1,6 @@
 import { IssueReport, Agent } from '../types';
+// @ts-ignore
+import regeneratedImage from '../assets/images/regenerated_image_1782549420873.png';
 
 export const INITIAL_REPORTS: IssueReport[] = [
   {
@@ -6,7 +8,7 @@ export const INITIAL_REPORTS: IssueReport[] = [
     title: 'Water Main Burst & Road Erosion',
     category: 'Water & Utilities',
     description: 'A major water line is ruptured, pouring thousands of gallons onto Elm Street. The water flow has begun eroding the sub-base of the asphalt, creating dangerous sinkholes. Immediate public works intervention required.',
-    imageUrl: 'https://images.unsplash.com/photo-1515162305285-0293e4767cc2?q=80&w=600&auto=format&fit=crop',
+    imageUrl: regeneratedImage,
     location: {
       lat: 37.7749,
       lng: -122.4194,

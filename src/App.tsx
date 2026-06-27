@@ -17,10 +17,45 @@ import { DemoCase } from './data/demoCases';
 import CitizenProfileView from './views/CitizenProfileView';
 import { getInitialProfileState, CitizenProfileState, GAMIFICATION_RULES } from './utils/gamification';
 import { Language } from './utils/i18n';
+import OnboardingTour from './components/OnboardingTour';
+import LoginView from './components/LoginView';
 
 export default function App() {
   // Loading screen state
   const [isLoading, setIsLoading] = useState(true);
+
+  // Login State
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    return sessionStorage.getItem('civicpilot_logged_in') === 'true';
+  });
+
+  // Onboarding Product Tour State
+  const [onboardingOpen, setOnboardingOpen] = useState<boolean>(true);
+
+  const handleCloseOnboarding = () => {
+    setOnboardingOpen(false);
+  };
+
+  const handleLogin = (role: 'citizen' | 'admin') => {
+    setIsLoggedIn(true);
+    sessionStorage.setItem('civicpilot_logged_in', 'true');
+    if (role === 'admin') {
+      setCurrentView('command-center');
+    } else {
+      setCurrentView('dashboard');
+    }
+    setOnboardingOpen(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    sessionStorage.removeItem('civicpilot_logged_in');
+    setOnboardingOpen(false);
+  };
+
+  const handleReplayOnboarding = () => {
+    setOnboardingOpen(true);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,7 +91,7 @@ export default function App() {
   const [fontSize, setFontSize] = useState<'sm' | 'base' | 'lg' | 'xl'>(() => {
     const saved = localStorage.getItem('civicpilot_fontSize');
     if (saved === 'sm' || saved === 'base' || saved === 'lg' || saved === 'xl') return saved as any;
-    return 'base';
+    return 'lg';
   });
 
   const [highContrast, setHighContrast] = useState<boolean>(() => {
@@ -550,6 +585,7 @@ export default function App() {
         currentView={currentView} 
         onViewChange={setCurrentView} 
         hasUnfinishedMission={hasUnfinishedMission}
+        onLogout={handleLogout}
       />
 
       {/* Main Content Area */}
@@ -563,6 +599,9 @@ export default function App() {
           onToggleTheme={() => setTheme(prev => prev === 'light' ? 'dark' : 'light')}
           language={language}
           onLanguageChange={setLanguage}
+          fontSize={fontSize}
+          onFontSizeChange={setFontSize}
+          onReplayTour={handleReplayOnboarding}
         />
 
         {/* Content Viewports with animated route transitions */}
@@ -664,6 +703,7 @@ export default function App() {
                   onReducedMotionChange={setReducedMotion}
                   colorBlindMode={colorBlindMode}
                   onColorBlindModeChange={setColorBlindMode}
+                  onReplayTour={handleReplayOnboarding}
                 />
               )}
             </motion.div>
@@ -693,6 +733,22 @@ export default function App() {
         onViewChange={setCurrentView} 
         hasUnfinishedMission={hasUnfinishedMission}
       />
+
+      {/* Premium First-Time Onboarding Experience */}
+      {!isLoading && isLoggedIn && (
+        <OnboardingTour
+          language={language}
+          currentView={currentView}
+          onViewChange={setCurrentView}
+          isOpen={onboardingOpen}
+          onClose={handleCloseOnboarding}
+        />
+      )}
+
+      {/* Simulated Login Screen Overlay */}
+      {!isLoading && !isLoggedIn && (
+        <LoginView onLogin={handleLogin} />
+      )}
     </div>
   );
 }

@@ -88,7 +88,7 @@ export default function DashboardView({
         <div className="relative z-10 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono font-medium tracking-wider text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-150 dark:border-indigo-500/20 rounded-full mb-6">
             <Sparkles className="w-3 h-3 animate-pulse" />
-            <span>AI-POWERED AUTONOMOUS DISPATCH</span>
+            <span>Powered by Google Gemini 2.5 Flash</span>
           </div>
           
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display leading-tight">
@@ -96,7 +96,7 @@ export default function DashboardView({
           </h1>
           
           <p className="mt-4 text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-            A specialized cognitive architecture linking advanced vision agents, spatial mapping, and auto-prepared Open311 dossiers to accelerate local municipal response by up to 10x.
+            Report civic issues using images, voice or text. Gemini understands every report, Mission Control explains every decision, and municipalities receive AI-powered recommendations to resolve issues faster.
           </p>
           
           <div className="mt-8 flex flex-wrap gap-4">
@@ -271,7 +271,7 @@ export default function DashboardView({
           </div>
           <p className="text-3xl font-bold text-slate-950 dark:text-white tracking-tight mt-4 font-display">{resolvedCases}</p>
           <p className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-1 uppercase tracking-wider">Resolved Incidents</p>
-          <p className="text-[11px] text-slate-500 mt-2">Dossiers signed, packaged and dispatched successfully.</p>
+          <p className="text-[11px] text-slate-500 mt-2">Incidents verified and dispatched successfully for municipal action.</p>
         </div>
 
         <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800/60 bg-white dark:bg-slate-900/20 hover:border-slate-300 dark:hover:border-slate-700/50 transition-all duration-300 relative group overflow-hidden shadow-sm hover:shadow-md">
